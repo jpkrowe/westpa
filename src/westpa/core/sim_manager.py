@@ -502,11 +502,17 @@ class WESimManager:
 
         self.rc.pstatus('Waiting for segments to complete...')
 
+        ###
+        # Simulation is getting stuck somewhere below here
+        ###
+
+
         # Let the WE driver assign completed segments
         if completed_segments:
             self.we_driver.assign(list(completed_segments.values()))
 
         # load restart data
+        # is the system slow to load the restart data? 
         self.data_manager.prepare_segment_restarts(
             incomplete_segments.values(), self.current_iter_bstates, self.current_iter_istates
         )

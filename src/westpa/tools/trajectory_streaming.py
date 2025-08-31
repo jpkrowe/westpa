@@ -10,9 +10,12 @@ import sys
 import select
 
 # TODO: Add options for LAMMPS and NAMD
-ACCEPTABLE_MD_ENGINES = ["gromacs"]
-IMD_FLAGS = {"gromacs": {"-imdwait": None, "-imdport": "0"}}
-IMD_PORT_OUTPUT = {"gromacs": r"IMD connection on port (\d+)"}
+ACCEPTABLE_MD_ENGINES = ["gromacs", "namd"]
+IMD_FLAGS = {"gromacs": {"-imdwait": None, "-imdport": "0"}, "namd": {}}
+ALLOWS_PORT0 = {"gromacs": True, "namd": False}
+IMD_PORT_OUTPUT = {"gromacs": r"IMD connection on port (\d+)", "namd": "INTERACTIVE MD AWAITING CONNECTION"}
+# The PORT_FLAG is only added if the simulation does not allow port 0
+PORT_FLAG = {"namd": "--IMDport"}
 
 log = logging.getLogger("TrajectoryStreamer")
 log.setLevel(logging.INFO)
